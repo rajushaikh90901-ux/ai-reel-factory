@@ -22,7 +22,7 @@ Make it engaging, accurate, and avoid unsupported claims.
     body = {"contents":[{"parts":[{"text":prompt}]}],
             "generationConfig":{"temperature":0.8, "responseMimeType":"application/json"}}
     req = Request(url, data=json.dumps(body).encode(), headers={"Content-Type":"application/json"}, method="POST")
-    with urlopen(req, timeout=60) as response:
+    with urlopen(req, timeout=180) as response:
         data = json.loads(response.read().decode())
     raw = data["candidates"][0]["content"]["parts"][0]["text"]
     return json.loads(raw)
