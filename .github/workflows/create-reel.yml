@@ -39,7 +39,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           REEL_TOPIC: ${{ inputs.topic }}
-          GEMINI_MODEL: gemini-3.8-flash
+          GEMINI_MODEL: gemini-3.5-flash-lite
           TTS_VOICE: hi-IN-SwaraNeural
         run: python main.py
 
