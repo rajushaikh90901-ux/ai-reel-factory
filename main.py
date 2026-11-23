@@ -38,31 +38,9 @@ def find_font():
     return None
 
 def make_background(title):
-    w, h = 1080, 1920
-    im = Image.new("RGB", (w,h))
-    px = im.load()
-    top, bottom = (9, 16, 38), (42, 18, 74)
-    for y in range(h):
-        t = y/(h-1)
-        c = tuple(int(top[i]*(1-t)+bottom[i]*t) for i in range(3))
-        for x in range(w):
-            px[x,y] = c
-    d = ImageDraw.Draw(im, "RGBA")
-    d.ellipse((650,-150,1300,500), fill=(96,70,220,65))
-    d.ellipse((-300,1250,500,2050), fill=(0,180,190,45))
-    d.rounded_rectangle((70,250,1010,1670), radius=55, outline=(255,255,255,65), width=3)
-    font_path = find_font()
-    title_font = ImageFont.truetype(font_path, 76) if font_path else ImageFont.load_default()
-    small_font = ImageFont.truetype(font_path, 30) if font_path else ImageFont.load_default()
-    lines = textwrap.wrap(title.upper(), width=18)
-    y = 620
-    for line in lines[:3]:
-        box = d.textbbox((0,0), line, font=title_font, stroke_width=1)
-        tw = box[2]-box[0]
-        d.text(((w-tw)//2,y), line, font=title_font, fill=(255,255,255), stroke_width=1, stroke_fill=(20,20,40))
-        y += 105
-    d.text((90,1530), "AI REEL FACTORY  •  ORIGINAL CONTENT", font=small_font, fill=(210,220,255,220))
-    im.save(OUT/"background.png")
+    character = Image.open("9DA24A7D-BCB3-44BF-8E72-FA669452D455.png").convert("RGB")
+    character = character.resize((1080, 1920))
+    character.save(OUT / "background.png")
 
 def get_audio_duration(path):
     result = subprocess.check_output([
